@@ -1,0 +1,126 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+*{
+  outline: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(0, 205, 205);
+}
+button, input[type=submit] {
+  cursor: pointer;
+}
+select {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+option {
+  padding: 5px;
+}
+.App {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 20px);
+  max-width: 1000px;
+  margin: auto;
+}
+#logo {
+  font-weight: bold;
+  font-style: oblique;
+  font-size: 20px;
+  color: gold;
+}
+.component {
+  background-color: rgb(60, 60, 60);
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.auth {
+  position: relative;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+#msgField {
+  display: none;
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: calc(100% - 24px);
+  padding: 10px;
+  text-align: center;
+  color: red;
+  border: 2px solid red;
+  background-color: rgb(255, 235, 239);
+}
+input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid goldenrod;
+}
+input[type=submit] {
+  color: gold;
+  background-color: teal;
+}
+.authbtn {
+  float: right;
+}
+
+
+/* Blog */
+
+#blogview h1{
+  text-align: center;
+}
+#blogview span {
+  color: rgb(0, 205, 205);
+}
+#blogview p {
+  padding: 10px;
+}
+textarea {
+  resize: none;
+  height: 500px;
+  margin-bottom: 10px;
+}
+.blogPen {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px white;
+}
+.blogPen img {
+  position: relative;
+  top: 4px;
+  width: 14px;
+}
+
+.blogPreview {
+  position: relative;
+}
+.blogPreview p {
+  max-height: 45px;
+  overflow: hidden;
+}
+.blogOperations {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.blogOperations button {
+  margin: 5px;
+  padding: 0 5px;
+  background-color: white;
+}
