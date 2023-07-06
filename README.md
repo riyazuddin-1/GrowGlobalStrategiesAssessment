@@ -16,9 +16,13 @@ All the data is managed on the MongoDB database.
 The Node.js backend is in connection with MongoDB Atlas to read, write, update and delete data that is handled on the MongoDB database.
 
 ## How to run the App
-Firstly, Go to the [/backend] folder and run the 'node index.js' command in the terminal.
-The Backend will run on localhost at port 3333.
+Firstly, setup the backend on localhost. Follow the steps given below.
+> Go to the [/backend] folder and run 'npm i' or 'npm install' command to install dependencies.
+> Once the dependencies are installed, run the 'node index.js' command in the terminal.
+> The Backend will run on localhost at port 3333.
 Note: Make sure to have an internet connection so that the backend can connect to MongoDB Atlas.
 
-Then, Go to the [/frontend] folder and run the 'npm start' command in the terminal.
-The Application will automatically run on the default browser once it is executed successfully.
+After the backend is setup, run the frontend. Follow the steps given below.
+> Go to the [/frontend] folder and run 'npm i' or 'npm install' command to install dependencies.
+> Once the dependencies are installed, run the 'npm start' command in the terminal.
+> The Application will automatically run on the default browser once it is executed successfully.
