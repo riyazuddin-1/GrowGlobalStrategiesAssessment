@@ -1,5 +1,3 @@
-This is an Assessment project for 'Remote Full Stack Developer Job at Grow Global Strategies Private Limited'
-
 This Project is a web application made using React.js for the frontend and Node.js for the backend.
 The application is a blog management application with which one can Create, Read, Update and Delete blogs.
 
@@ -18,11 +16,11 @@ The Node.js backend is in connection with MongoDB Atlas to read, write, update a
 ## How to run the App
 Firstly, setup the backend on localhost. Follow the steps given below.
 > Go to the [/backend] folder and run 'npm i' or 'npm install' command to install dependencies.
+> Setup PORT and MongoDB URI before running the application.
 > Once the dependencies are installed, run the 'node index.js' command in the terminal.
-> The Backend will run on localhost at port 3333.
 Note: Make sure to have an internet connection so that the backend can connect to MongoDB Atlas.
 
 After the backend is setup, run the frontend. Follow the steps given below.
 > Go to the [/frontend] folder and run 'npm i' or 'npm install' command to install dependencies.
 > Once the dependencies are installed, run the 'npm start' command in the terminal.
-> The Application will automatically run on the default browser once it is executed successfully.
+> The Application will run on the default browser once it is executed successfully.

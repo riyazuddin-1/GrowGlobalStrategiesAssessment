@@ -1,0 +1,4 @@
+{
+    "backend_server": "http://localhost:3333",
+    "EncryptionKey": "alphaRomeo"
+}
