@@ -2,23 +2,29 @@ import Navbar from "./navbar";
 import Home from "./home";
 import Login from "./login";
 import Register from "./register";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Blogview from "./blogview";
 import Blogedit from "./blogedit";
-var cryptoJS = require('crypto-js')
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+const cryptoJS = require('crypto-js');
+const configs = require("./config.json");
 
 function App() {
-  var authCred = sessionStorage.getItem('Credentials');
+  // Check user authentication
+  const authCred = sessionStorage.getItem('Credentials');
   var isLoggedIn;
   if(authCred) {
     isLoggedIn = true;
   } else {
     isLoggedIn = false;
   }
-  var funcAuthCred = (data) => {
-    sessionStorage.setItem('Credentials', cryptoJS.AES.encrypt(JSON.stringify(data), 'GiveMeJob').toString());
+
+  // Function to set user authentication
+  const funcAuthCred = (data) => {
+    sessionStorage.setItem('Credentials', cryptoJS.AES.encrypt(JSON.stringify(data), configs.EncryptionKey).toString());
     window.location = '/';
   }
+
   return (
     <BrowserRouter>
     <div className="App">

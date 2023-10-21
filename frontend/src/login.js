@@ -1,8 +1,11 @@
+const configs = require("./config.json");
+
 const Login = ({funcAuthCred}) => {
+    // login form submit
     async function handleSubmit(e) {
         e.preventDefault();
         const form = e.currentTarget;
-        const submitTo = form.action;
+        const submitTo = `${configs.backend_server}/login`;
         const formData = new FormData(form);
         const plainFormData = Object.fromEntries(formData.entries());
         const jsonDataString = JSON.stringify(plainFormData);
@@ -14,14 +17,17 @@ const Login = ({funcAuthCred}) => {
             body: jsonDataString
         })
         if(response.ok) {
+            // Setting encrypted authentication data to local storage
             const credentials = await response.json();
             funcAuthCred(credentials);
         } else {
+            // Authentication failed
             const message = await response.text();
             showMessage(message);
         }
     }
 
+    // Alert for messages/errors
     function showMessage(message) {
         const msgField = document.getElementById('msgField');
         msgField.innerHTML = message;
@@ -33,7 +39,7 @@ const Login = ({funcAuthCred}) => {
     return (
         <div className='component auth'>
             <p id='msgField'></p>
-            <form action='http://localhost:3333/login' id="loginForm" onSubmit = {handleSubmit}>
+            <form id="loginForm" onSubmit = {handleSubmit}>
             <label htmlFor="email">Email</label>
             <input type="email" name="email" placeholder="Email ID" id='email' required/>
             <label htmlFor="password">Password</label>

@@ -1,30 +1,40 @@
 import { useState } from 'react';
 
-var cryptoJS = require('crypto-js');
+const cryptoJS = require('crypto-js');
+const configs = require("./config.json");
 
 const Blogedit = ({authCred, blogId, title, content}) => {
-    var [disable, setDisable] = useState(blogId ? false: true);
+    const [disable, setDisable] = useState(blogId ? false: true);
+
+    // Verifying user authentication
     if(!authCred) {
         window.location = '/';
     } else {
-        var bytesString = cryptoJS.AES.decrypt(authCred, 'GiveMeJob').toString(cryptoJS.enc.Utf8);
-        var userInfo = JSON.parse(bytesString);
+        const bytesString = cryptoJS.AES.decrypt(authCred, configs.EncryptionKey).toString(cryptoJS.enc.Utf8);
+        const userInfo = JSON.parse(bytesString);
     }
+
+    // Handling form submit
     async function handleSubmit(e) {
         e.preventDefault();
         const form = e.currentTarget;
         var submitTo;
         if(blogId) {
-            submitTo = 'http://localhost:3333/updateBlog';
+            submitTo = `${configs.backend_server}/updateBlog`;
         } else {
-            submitTo = 'http://localhost:3333/postBlog'
+            submitTo = `${configs.backend_server}/postBlog`;
         }
+        // catching form data
         const formData = new FormData(form);
+
+        // appending author credentials
         if(blogId) { formData.append('id', blogId) };
         formData.append('author', userInfo['name']);
         formData.append('authorId', userInfo['email']);
         const plainFormData = Object.fromEntries(formData.entries());
         const jsonDataString = JSON.stringify(plainFormData);
+
+        // Submitting data to backend
         const response = await fetch(submitTo, {
             method: 'POST',
             headers: {
@@ -32,6 +42,7 @@ const Blogedit = ({authCred, blogId, title, content}) => {
             },
             body: jsonDataString
         })
+        // Checking if the submission was successful
         if(response.ok) {
             if(!blogId) {
                 const result = await response.json();
@@ -41,6 +52,8 @@ const Blogedit = ({authCred, blogId, title, content}) => {
             }
         }
     }
+
+    // Disabling form submit if content is empty
     function handleContent(e) {
         if(e.target.value) {
             setDisable(false);

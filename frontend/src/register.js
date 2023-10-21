@@ -1,8 +1,11 @@
+const configs = require("./config.json");
+
 const Register = () => {
+    // Handling Registration
     async function handleSubmit(e) {
         e.preventDefault();
         const form = e.currentTarget;
-        const submitTo = form.action;
+        const submitTo = `${configs.backend_server}/register`;
         const formData = new FormData(form);
         const plainFormData = Object.fromEntries(formData.entries());
         const jsonDataString = JSON.stringify(plainFormData);
@@ -21,6 +24,7 @@ const Register = () => {
         }
     }
 
+    // Alert for messages/errors
     function showMessage(message) {
         const msgField = document.getElementById('msgField');
         msgField.innerHTML = message;
@@ -30,6 +34,7 @@ const Register = () => {
         }, 5000);
     }
 
+    // Verifying if the 'password' and 'confirm password' match
     function pwdMatch() {
         const pwd = document.getElementById('pwd');
         const pwdConfirm = document.getElementById('pwdConfirm');
@@ -45,10 +50,11 @@ const Register = () => {
             reminder.style.color = 'green';
         }
     }
+    
     return (
         <div className='component auth'>
             <p id='msgField'></p>
-            <form action='http://localhost:3333/register' id="registerForm" onSubmit={handleSubmit}>
+            <form id="registerForm" onSubmit={handleSubmit}>
             <label htmlFor="name">Name:</label>
             <input type="text" name="username" placeholder="Your Name" id='name' maxLength='20' required/>
             <label htmlFor="email">Email:</label>

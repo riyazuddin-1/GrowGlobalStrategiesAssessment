@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Blogedit from "./blogedit";
-var cryptoJS = require("crypto-js");
+const cryptoJS = require("crypto-js");
+const configs = require("./config.json");
 
 const Blogview = ({authCred, editor}) => {
     const { blogId } = useParams();
-    var [isLoading, setLoading] = useState(true);
-    var [user, setUser] = useState(false);
-    var [title, setTitle] = useState(false);
-    var [author, setAuthor] = useState(false);
-    var [authorId, setAuthorId] = useState(false);
-    var [content, setContent] = useState(false);
-    var [edit, setEdit] = useState(false);
+    const [isLoading, setLoading] = useState(true);
+    const [user, setUser] = useState(false);
+    const [title, setTitle] = useState(false);
+    const [author, setAuthor] = useState(false);
+    const [authorId, setAuthorId] = useState(false);
+    const [content, setContent] = useState(false);
+    const [edit, setEdit] = useState(false);
+
+    // Getting the blog data
     useEffect(() => {
-        fetch('http://localhost:3333/getBlog', {
+        fetch(`${configs.backend_server}/getBlog`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,8 +30,8 @@ const Blogview = ({authCred, editor}) => {
                 setAuthorId(blogData.AuthorId);
                 setContent(blogData.Content);
                 if(authCred) {
-                    var bytesString = cryptoJS.AES.decrypt(authCred, 'GiveMeJob').toString(cryptoJS.enc.Utf8);
-                    var userInfo = JSON.parse(bytesString);
+                    const bytesString = cryptoJS.AES.decrypt(authCred, configs.EncryptionKey).toString(cryptoJS.enc.Utf8);
+                    const userInfo = JSON.parse(bytesString);
                     setUser(userInfo.email);
                 }
             }
@@ -41,16 +44,17 @@ const Blogview = ({authCred, editor}) => {
     return (
         <>
         { !edit && <>
-        { isLoading && <p>Loading...</p>}
-        { !isLoading && !title && <p>The blog Id is invalid.</p> }
-        { !isLoading && title && <div id='blogview'>
-            <h1>{title}</h1>
-            <p><span>written by:</span> {author}</p>
-            <hr/>
-            <p>{content}</p>
-            { authorId && authorId===user && <button className='blogPen' onClick={()=> setEdit(true)}><img src='../pen.svg'/> Edit blog</button>}
-        </div>}
-        </>}
+            { isLoading && <p>Loading...</p>}
+            { !isLoading && !title && <p>The blog Id is invalid.</p> }
+            { !isLoading && title && <div id='blogview'>
+                <h1>{title}</h1>
+                <p><span>written by:</span> {author}</p>
+                <hr/>
+                <p>{content}</p>
+                { authorId && authorId===user && <button className='blogPen' onClick={()=> setEdit(true)}><img src='../pen.svg'/> Edit blog</button>}
+            </div>}
+            </>
+        }
         { authorId && authorId===user && edit && <Blogedit authCred={authCred} blogId={blogId} title={title} content={content}/>}
         </>
     );
