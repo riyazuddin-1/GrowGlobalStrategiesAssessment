@@ -9,7 +9,8 @@ If not authorized, the user can only read the blog content.
 
 ## Backend
 The Backend of the application is built with Node.js and all the files are in the [/backend] folder.
-The Backend runs on (http://localhost:3333) localhost at port 3333.
+Create a 'config.json' file and specify "MongoDB_uri" and "PORT" for the backend.
+The Backend runs on localhost at port that you specify in config.json.
 All the data is managed on the MongoDB database.
 The Node.js backend is in connection with MongoDB Atlas to read, write, update and delete data that is handled on the MongoDB database.
 
